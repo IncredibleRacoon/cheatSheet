@@ -1,5 +1,6 @@
 *{ 
     font-family: "Trebuchet MS", Verdana, Arial, sans-serif;
+    font-size: 30px;
 }
 
 .terminalCode {
@@ -7,8 +8,17 @@
     padding: 20px;
     border-radius: 5px;
     color: rgba(220, 220, 220, 1);
+    font-size: .6rem;
 }
 
 .terminalCode > i {
     color: rgba(150, 150, 150, 1);
+    font-size: .6rem;
+}
+
+p {
+   font-size: .6rem;
+   line-height: 1rem;
+   color: rgb(34, 38, 80);
+   font-weight: 500;
 }

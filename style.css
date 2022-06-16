@@ -1,3 +1,7 @@
+*{ 
+    font-family: "Trebuchet MS", Verdana, Arial, sans-serif;
+}
+
 .terminalCode {
     background-color: rgba(50, 50, 50, 1);
     padding: 20px;

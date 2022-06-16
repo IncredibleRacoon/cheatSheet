@@ -19,6 +19,19 @@
 p {
    font-size: .6rem;
    line-height: 1rem;
-   color: rgb(34, 38, 80);
+   color: rgb(72, 73, 103);
    font-weight: 500;
+}
+
+h3 {
+    color: rgb(72, 73, 103);
+    font-size: 0.85rem;
+}
+h2 {
+    color: rgb(72, 73, 103);
+    font-size: 1rem;
+}
+h1 {
+    color: rgb(72, 73, 103);
+    font-size: 1.2rem;
 }

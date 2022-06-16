@@ -21,19 +21,21 @@ body {
 p {
    font-size: .6rem;
    line-height: 1rem;
-   color: rgb(27, 29, 105);
+   color: rgba(27, 29, 105, .5);
    font-weight: 500;
 }
 
 h3 {
     color: rgb(27, 29, 105);
-    font-size: 0.85rem;
+    font-size: 0.6rem;
+    font-weight: 900;
     margin-bottom: -.3rem;
     margin-top: 1.3rem;
 }
 h2 {
     color: rgb(27, 29, 105);
-    font-size: 1rem;
+    font-size: .9rem;
+    margin-top: 1.5rem;
 }
 h1 {
     color: rgb(27, 29, 105);

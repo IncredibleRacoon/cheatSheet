@@ -46,7 +46,18 @@ i {
     font-size: .6rem;
 }
 #contentContainer {
-    width: 90vw;
+    width: 90%;
     max-width: calc(50 * .6rem);
     margin: auto;
+    grid-area: content;
+}
+
+#gridContainer {
+    display: grid;
+    grid-template-columns: 30px 1fr;
+    grid-template-rows: 50px 1fr;
+    grid-template-areas: 
+        "menubar menubar"
+        "chapter content"
+    ;
 }

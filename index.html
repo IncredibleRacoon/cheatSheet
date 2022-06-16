@@ -9,112 +9,115 @@
 </head>
 <script src="script.js"></script>
 <body>
-    <div id="contentContainer">
-        <h1>Git</h1>
-        <p>
-            Git is the most popular version control system that is currently available.
-            It was initialized by Linus Torvalds in 2005.
-        </p>
-        <h2>Setup your repository</h2>
-        <p>
-            In this chapter you will learn the basics of how to set up a repository
-            and how the connection to your favorite version control provider is set.
-        </p>
-        <h3>Create repository</h3>
-        <p>
-            To create a repository you need to go to the 
-            the version control provider of your choice (git based).
-            Here you should be able to create a new repository within
-            the startscreen.
-        </p>
-        <h3>Clone repository</h3>
-        <p>
-            Now you need to clone the repository in order to develop on
-            your local machine. For that you need the SSH url of your repository.
-            You can find the url typically in the UI of the version control
-            provider. Make sure to copy the SSH url and nothing else. Then you have
-            to run the following command in the terminal/ console right in the direction
-            you want to work on the project:
-        </p>
-        <div class="terminalCode">$ git clone <i>SSH_Url</i></div>
-        <p>
-            After this you should see the files you created in this folder.
-        </p>
-        <h2>Work with the repository</h2>
-        <p>
-            Now where you know how to set up a repo, we can move on and learn how to
-            take advantage of this. In this chapter you will learn the basics to 
-            develop local and keep it up to date outside of your machine. 
-        </p>
-        <h3>Stage files</h3>
-        <p>
-            To tell git which files you finally want to load to the servers of the provider, 
-            you need to add them with the logical command:
-        </p>
-        <div class="terminalCode">$ git add <i>file_you_want_to_stage</i></div>
-        <p>
-            If you dont type a file but just a dot (".") then you stage all changes
-            you have done.
-        </p>
-        <h3>Commit changes</h3>
-        <p>
-            Commits are the essential part of git version control. You can compare
-            these to backups. To create a commit, you first need to stage changes. Only
-            these are taken into account. Then you have to type the following command:
-        </p>
-        <div class="terminalCode">$ git commit -m "<i>commit_message</i>"</div>
-        <p>
-            The commit message should tell the changes. There are a few conventions that go along
-            with them. For example you should always use the verb in the imperative like "Add file"
-            or "Change footer style". Furthermore you should commit pretty often, so that you
-            can describe your changes in one line. If you need more than one line, you can leave
-            the <i>-m</i> and the message out of the command. If you do this, git automatically 
-            opens the texteditor you set, where vim is the default.
-        </p>
-        <h3>Push commits</h3>
-        <p>
-            To finally upload the changes in the online filesystem, you need the call the <i>push</i>
-            command:
-        </p>
-        <div class="terminalCode">$ git push <i>origin target_branch</i></div>
-        <p>
-            The default target-branch is called <i>main</i>. In the next section we talk how to
-            change branches and what they are good for.
-        </p>
-        <h3>Branches</h3>
-        <p>
-            If you dont want just one logical line of commits, for example if you release the
-            main branch to the public, you dont want the user to update the program for every single 
-            push. To avoid this, you can add a branch to your project, for example a developer
-            branch where you develop features or fix bugs. With the following command
-            you can create a new branch:
-        </p>
-        <div class="terminalCode">$ git branch <i>branch_name</i></div>
-        <p>
-            To show all branches you can run the command:
-        </p>
-        <div class="terminalCode">$ git branch</div>
-        <p>
-            The branch where youre in is shown with an extra symbol.
-            If you want to change your current branch, you can to this by 
-            typing the following lines:
-        </p>
-        <div class="terminalCode">$ git checkout <i>branch_name</i></div>
-        <p>
-            To create a branch and instantly change to it, you can add
-            a <i>-b</i> tag to the above command.
-        </p>
-        <h3>Merge branches</h3>
-        <p>
-            If you want to merge two branches or in other words, put the code with its
-            features together, you can this that way:
-        </p>
-        <div class="terminalCode">$ git merge <i>branch_name</i></div>
-        <p>
-            This will take the changes you've commited in <i>branch_name</i> and
-            add them to the branch you're currently in.
-        </p>
-        <h2>Still in progress</h2>
+
+    <div id="gridContainer">
+        <div id="contentContainer">
+            <h1>Git</h1>
+            <p>
+                Git is the most popular version control system that is currently available.
+                It was initialized by Linus Torvalds in 2005.
+            </p>
+            <h2>Setup your repository</h2>
+            <p>
+                In this chapter you will learn the basics of how to set up a repository
+                and how the connection to your favorite version control provider is set.
+            </p>
+            <h3>Create repository</h3>
+            <p>
+                To create a repository you need to go to the
+                the version control provider of your choice (git based).
+                Here you should be able to create a new repository within
+                the startscreen.
+            </p>
+            <h3>Clone repository</h3>
+            <p>
+                Now you need to clone the repository in order to develop on
+                your local machine. For that you need the SSH url of your repository.
+                You can find the url typically in the UI of the version control
+                provider. Make sure to copy the SSH url and nothing else. Then you have
+                to run the following command in the terminal/ console right in the direction
+                you want to work on the project:
+            </p>
+            <div class="terminalCode">$ git clone <i>SSH_Url</i></div>
+            <p>
+                After this you should see the files you created in this folder.
+            </p>
+            <h2>Work with the repository</h2>
+            <p>
+                Now where you know how to set up a repo, we can move on and learn how to
+                take advantage of this. In this chapter you will learn the basics to
+                develop local and keep it up to date outside of your machine.
+            </p>
+            <h3>Stage files</h3>
+            <p>
+                To tell git which files you finally want to load to the servers of the provider,
+                you need to add them with the logical command:
+            </p>
+            <div class="terminalCode">$ git add <i>file_you_want_to_stage</i></div>
+            <p>
+                If you dont type a file but just a dot (".") then you stage all changes
+                you have done.
+            </p>
+            <h3>Commit changes</h3>
+            <p>
+                Commits are the essential part of git version control. You can compare
+                these to backups. To create a commit, you first need to stage changes. Only
+                these are taken into account. Then you have to type the following command:
+            </p>
+            <div class="terminalCode">$ git commit -m "<i>commit_message</i>"</div>
+            <p>
+                The commit message should tell the changes. There are a few conventions that go along
+                with them. For example you should always use the verb in the imperative like "Add file"
+                or "Change footer style". Furthermore you should commit pretty often, so that you
+                can describe your changes in one line. If you need more than one line, you can leave
+                the <i>-m</i> and the message out of the command. If you do this, git automatically
+                opens the texteditor you set, where vim is the default.
+            </p>
+            <h3>Push commits</h3>
+            <p>
+                To finally upload the changes in the online filesystem, you need the call the <i>push</i>
+                command:
+            </p>
+            <div class="terminalCode">$ git push <i>origin target_branch</i></div>
+            <p>
+                The default target-branch is called <i>main</i>. In the next section we talk how to
+                change branches and what they are good for.
+            </p>
+            <h3>Branches</h3>
+            <p>
+                If you dont want just one logical line of commits, for example if you release the
+                main branch to the public, you dont want the user to update the program for every single
+                push. To avoid this, you can add a branch to your project, for example a developer
+                branch where you develop features or fix bugs. With the following command
+                you can create a new branch:
+            </p>
+            <div class="terminalCode">$ git branch <i>branch_name</i></div>
+            <p>
+                To show all branches you can run the command:
+            </p>
+            <div class="terminalCode">$ git branch</div>
+            <p>
+                The branch where youre in is shown with an extra symbol.
+                If you want to change your current branch, you can to this by
+                typing the following lines:
+            </p>
+            <div class="terminalCode">$ git checkout <i>branch_name</i></div>
+            <p>
+                To create a branch and instantly change to it, you can add
+                a <i>-b</i> tag to the above command.
+            </p>
+            <h3>Merge branches</h3>
+            <p>
+                If you want to merge two branches or in other words, put the code with its
+                features together, you can this that way:
+            </p>
+            <div class="terminalCode">$ git merge <i>branch_name</i></div>
+            <p>
+                This will take the changes you've commited in <i>branch_name</i> and
+                add them to the branch you're currently in.
+            </p>
+            <h2>Still in progress</h2>
+        </div>
     </div>
     
 

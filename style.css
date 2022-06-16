@@ -2,6 +2,9 @@
     font-family: "Trebuchet MS", Verdana, Arial, sans-serif;
     font-size: 30px;
 }
+body {
+    margin: 0;
+}
 
 .terminalCode {
     background-color: rgba(50, 50, 50, 1);
@@ -13,25 +16,35 @@
 
 .terminalCode > i {
     color: rgba(150, 150, 150, 1);
-    font-size: .6rem;
 }
 
 p {
    font-size: .6rem;
    line-height: 1rem;
-   color: rgb(72, 73, 103);
+   color: rgb(27, 29, 105);
    font-weight: 500;
 }
 
 h3 {
-    color: rgb(72, 73, 103);
+    color: rgb(27, 29, 105);
     font-size: 0.85rem;
+    margin-bottom: -.3rem;
+    margin-top: 1.3rem;
 }
 h2 {
-    color: rgb(72, 73, 103);
+    color: rgb(27, 29, 105);
     font-size: 1rem;
 }
 h1 {
-    color: rgb(72, 73, 103);
-    font-size: 1.2rem;
+    color: rgb(27, 29, 105);
+    font-size: 1.4rem;
+}
+
+i {
+    font-size: .6rem;
+}
+#contentContainer {
+    width: 90vw;
+    max-width: calc(50 * .6rem);
+    margin: auto;
 }

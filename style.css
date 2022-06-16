@@ -5,10 +5,8 @@
 .terminalCode {
     background-color: rgba(50, 50, 50, 1);
     padding: 20px;
-    border-radius: 12px;
+    border-radius: 7px;
     color: rgba(200, 200, 200, 1);
-    -webkit-box-shadow: inset 0px 0px 15px 6px rgba(0,0,0,0.46); 
-    box-shadow: inset 0px 0px 15px 6px rgba(0,0,0,0.46);
 }
 .terminalCode > i {
     color: rgba(150, 150, 150, 1);

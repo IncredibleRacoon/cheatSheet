@@ -110,3 +110,7 @@ i {
     color: rgba(169, 190, 255, 1);
     margin-top: 5px;
 }
+
+a {
+    text-decoration: none;
+}

@@ -56,6 +56,8 @@ i {
     margin: auto;
     margin-left: 0;
     grid-area: content;
+    height: 100%;
+    overflow: scroll;
 }
 
 #gridContainer {
@@ -66,13 +68,14 @@ i {
         "menubar menubar"
         "chapter content"
     ;
+    height: 100vh;
 }
 #chapterContainer {
     grid-area: chapter;
     height: 100%;
     width: 0px;
     padding-right: 20px;
-    background-color: rgba(27, 29, 105, 0.2);
+    background-color: rgba(27, 29, 105, 0.3);
     transition: width .4s;
     z-index: 1;
     position: relative;
@@ -80,6 +83,7 @@ i {
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     max-width: max-content;
+    overflow: scroll;
 }
 #menubarContainer {
     grid-area: menubar;

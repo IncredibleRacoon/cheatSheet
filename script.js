@@ -23,7 +23,7 @@ const createChapterContent = () => {
         headerCreated.style.marginLeft = 20 * (chapter.tagName.toString()[1] - 1) + "px";
         headerCreated.style.fontWeight = 100;
         headerCreated.style.marginTop = "1rem";
-        headerCreated.style.color = "rgba(27, 29, 105, 0.8)";
+        headerCreated.style.color = "rgba(255, 255, 255, 1)";
         chapterContent.appendChild(headerCreated);
     }
 }

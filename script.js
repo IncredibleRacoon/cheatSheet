@@ -11,6 +11,7 @@ function startFunction() {
     });
 
     createChapterContent();
+    addCopyButton();
 
 }
 
@@ -25,7 +26,6 @@ const createChapterContent = () => {
         headerCreated.style.marginTop = "1rem";
         headerCreated.style.color = "rgba(255, 255, 255, 1)";
         headerCreated.addEventListener("click", () => {
-            let element = document.getElementsByTagName("h3")[0];
             for (header of allChapters) {
                 if (headerCreated.innerHTML == header.innerHTML) {
                     header.scrollIntoView({ behavior: 'smooth' });
@@ -38,4 +38,18 @@ const createChapterContent = () => {
         })
         chapterContent.appendChild(headerCreated);
     }
+}
+
+const addCopyButton = () => {
+    const allTerminalCodes = document.getElementsByClassName("terminalCode");
+    for (command of allTerminalCodes) {
+        command.addEventListener("click", (e) => {
+            let textToCopy = clearUpTerminalText(e.target.innerHTML);
+            navigator.clipboard.writeText(textToCopy);
+        })
+    }
+}
+
+const clearUpTerminalText = (terminalText) => {
+    return(terminalText.slice(2).replaceAll("<i>", "").replaceAll("</i>", ""));
 }

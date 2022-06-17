@@ -73,12 +73,13 @@ i {
     width: 0px;
     padding-right: 20px;
     background-color: rgba(27, 29, 105, 0.2);
-    transition: width .2s;
+    transition: width .4s;
     z-index: 1;
     position: relative;
     overflow: hidden;
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
+    max-width: max-content;
 }
 #menubarContainer {
     grid-area: menubar;
@@ -90,6 +91,7 @@ i {
 
 #chapterContent {
     overflow: hidden;
-    width: 520px;
     margin-left: 20px;
+    padding-right: 20px;
+    width: max-content;
 }

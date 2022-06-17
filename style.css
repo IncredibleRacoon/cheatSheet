@@ -76,6 +76,7 @@ i {
     transition: width .2s;
     z-index: 1;
     position: relative;
+    overflow: hidden;
 }
 #menubarContainer {
     grid-area: menubar;
@@ -86,5 +87,6 @@ i {
 
 #chapterContent {
     overflow: hidden;
+    width: 520px;
     margin-left: 20px;
 }

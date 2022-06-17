@@ -7,15 +7,18 @@ body {
 }
 
 .terminalCode {
-    background-color: rgba(50, 50, 50, 1);
+    background-color: rgba(16, 17, 61, .8);
     padding: 20px;
     border-radius: 5px;
     color: rgba(220, 220, 220, 1);
-    font-size: .6rem;
+    font-size: .5rem;
+    margin-top: -0.53em;
+    margin-bottom: -0.3rem;
 }
 
 .terminalCode > i {
     color: rgba(150, 150, 150, 1);
+    font-size: .5rem;
 }
 
 p {
@@ -64,7 +67,7 @@ i {
 }
 #chapterContainer {
     grid-area: chapter;
-    background-color: grey;
+    background-color: white;
 }
 #menubarContainer {
     grid-area: menubar;

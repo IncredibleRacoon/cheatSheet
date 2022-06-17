@@ -72,8 +72,41 @@ i {
 #chapterContainer {
     grid-area: chapter;
     background-color: white;
+    display: flex;
+    flex-wrap: wrap;
+    height: fit-content;
+    gap: 40px;
 }
 #menubarContainer {
     grid-area: menubar;
     background-color: rgb(27, 29, 105);
+}
+
+.h2chapter, .h3chapter {
+    border: 5px rgba(27, 29, 105, .5) solid;
+    width: 60%;
+    padding-bottom: 60%;
+    margin: auto;
+    height: 0;
+    background-color: rgba(27, 29, 105, 0); 
+    border-radius: 100%;
+}
+
+.h3chapter {
+    margin: auto;
+    width: 40%;
+    padding-bottom: 40%;
+}
+
+.h3chapter::before {
+    content: "";
+    padding-top: 20px;
+    background-color: rgba(27, 29, 105, .5);
+    height: 20px;
+    width: 6px;
+    margin: auto;
+    display: block;
+    height: 15px;
+    margin-top: -42.5px;
+    border-radius: 10px;
 }

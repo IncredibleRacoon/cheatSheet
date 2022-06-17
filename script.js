@@ -33,8 +33,6 @@ const createChapterContent = () => {
                 }
             }
             return;
-            
-
         })
         chapterContent.appendChild(headerCreated);
     }
@@ -46,6 +44,9 @@ const addCopyButton = () => {
         command.addEventListener("click", (e) => {
             let textToCopy = clearUpTerminalText(e.target.innerHTML);
             navigator.clipboard.writeText(textToCopy);
+            let oldText = e.target.innerHTML;
+            e.target.innerHTML = e.target.innerHTML.slice(0, -4) + "<div style=\"color=white; text-align: right; font-size: .5rem; margin-top: -.58rem\">COPIED</div></div>";
+            setTimeout(() => {e.target.innerHTML = oldText}, 700);
         })
     }
 }

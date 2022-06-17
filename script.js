@@ -24,6 +24,18 @@ const createChapterContent = () => {
         headerCreated.style.fontWeight = 100;
         headerCreated.style.marginTop = "1rem";
         headerCreated.style.color = "rgba(255, 255, 255, 1)";
+        headerCreated.addEventListener("click", () => {
+            let element = document.getElementsByTagName("h3")[0];
+            for (header of allChapters) {
+                if (headerCreated.innerHTML == header.innerHTML) {
+                    header.scrollIntoView({ behavior: 'smooth' });
+                    return;
+                }
+            }
+            return;
+            
+
+        })
         chapterContent.appendChild(headerCreated);
     }
 }

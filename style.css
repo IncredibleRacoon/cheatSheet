@@ -60,7 +60,7 @@ i {
 
 #gridContainer {
     display: grid;
-    grid-template-columns: 90px 1fr;
+    grid-template-columns: 60px 1fr;
     grid-template-rows: 50px 1fr;
     grid-template-areas: 
         "menubar menubar"
@@ -69,18 +69,22 @@ i {
 }
 #chapterContainer {
     grid-area: chapter;
-    background-color: white;
-    display: flex;
-    flex-wrap: wrap;
-    height: fit-content;
-    gap: 40px;
-    width: 70%;
-    margin: auto;
-    margin-top: 30px;
+    height: 100%;
+    width: 0px;
+    padding-right: 20px;
+    background-color: rgba(27, 29, 105, 0.3);
+    transition: width .2s;
+    z-index: 1;
+    position: relative;
 }
 #menubarContainer {
     grid-area: menubar;
     background-color: rgb(27, 29, 105);
     position: sticky;
     top: 0;
+}
+
+#chapterContent {
+    overflow: hidden;
+    margin-left: 20px;
 }

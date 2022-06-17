@@ -56,7 +56,6 @@ i {
     margin: auto;
     margin-left: 0;
     grid-area: content;
-    overflow: scroll;
 }
 
 #gridContainer {
@@ -67,7 +66,6 @@ i {
         "menubar menubar"
         "chapter content"
     ;
-    height: 100vh;
 }
 #chapterContainer {
     grid-area: chapter;
@@ -76,10 +74,15 @@ i {
     flex-wrap: wrap;
     height: fit-content;
     gap: 40px;
+    width: 70%;
+    margin: auto;
+    margin-top: 30px;
 }
 #menubarContainer {
     grid-area: menubar;
     background-color: rgb(27, 29, 105);
+    position: sticky;
+    top: 0;
 }
 
 .h2chapter, .h3chapter {

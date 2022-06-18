@@ -69,6 +69,7 @@ const addCopyButton = () => {
     for (command of allTerminalCodesHTML) {
         command.addEventListener("click", (e) => {
             let textToCopy = clearUpTerminalTextHTML(e.target.innerHTML);
+            alert(textToCopy);
             navigator.clipboard.writeText(textToCopy);
             let oldText = e.target.innerHTML;
             if (!(oldText.includes("COPIED"))) {
@@ -86,7 +87,7 @@ const clearUpTerminalTextJs = (terminalText) => {
     return(terminalText.slice(2).replaceAll("<i>", "").replaceAll("</i>", "").replaceAll("&nbsp;&nbsp;", "  ").replaceAll("<br><br>", "\n").replaceAll("<br>", ""));
 }
 const clearUpTerminalTextHTML = (terminalText) => {
-    return(terminalText.slice(2).replaceAll("<i>", "").replaceAll("</i>", "").replaceAll("&nbsp;&nbsp;", "  ").replaceAll("<br><br>", "\n").replaceAll("<br>", ""));
+    return(terminalText.replaceAll("&lt;", "<").replaceAll("&gt;", ">").replaceAll("&nbsp;&nbsp;", "    ").replaceAll("<br>", "\n").replaceAll("&nbsp;", "  "));
 }
 
 const htmlCodeToHtmlContent = (string) => {
@@ -104,3 +105,4 @@ alert(htmlCodeToHtmlContent(`<!DOCTYPE html>
   </body>
 </html>`))
 
+            

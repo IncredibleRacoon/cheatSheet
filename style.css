@@ -15,8 +15,8 @@ body {
     margin-top: -0.53em;
     margin-bottom: -0.3rem;
     font-family: monospace;
-    overflow: scroll;
-    white-space: nowrap;
+    overflow: auto;
+    white-space: nowrap;   
 }
 
 .terminalCodeWithoutCopy, .terminalCodeJs, .terminalCodeHTML {

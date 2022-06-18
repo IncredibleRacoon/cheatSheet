@@ -44,11 +44,6 @@ const addCopyButton = () => {
         command.addEventListener("click", (e) => {
             let textToCopy = clearUpTerminalText(e.target.innerHTML);
             navigator.clipboard.writeText(textToCopy);
-            let oldText = e.target.innerHTML;
-            if (!(oldText.includes("COPIED"))) {
-                e.target.innerHTML = oldText + "<div style=\"color=white; text-align: right; font-size: .5rem; margin-top: -.58rem\">COPIED</div></div>";
-            }
-            setTimeout(() => {e.target.innerHTML = e.target.innerHTML.replaceAll("<div style=\"color=white; text-align: right; font-size: .5rem; margin-top: -.58rem\">COPIED</div>", "")}, 700);
         })
     }
 
@@ -57,11 +52,6 @@ const addCopyButton = () => {
         command.addEventListener("click", (e) => {
             let textToCopy = clearUpTerminalTextJs(e.target.innerHTML);
             navigator.clipboard.writeText(textToCopy);
-            let oldText = e.target.innerHTML;
-            if (!(oldText.includes("COPIED"))) {
-                e.target.innerHTML = oldText + "<div style=\"color=white; text-align: right; font-size: .5rem; margin-top: -.58rem\">COPIED</div></div>";
-            }
-            setTimeout(() => {e.target.innerHTML = e.target.innerHTML.replaceAll("<div style=\"color=white; text-align: right; font-size: .5rem; margin-top: -.58rem\">COPIED</div>", "")}, 700);
         })
     }
 
@@ -69,13 +59,7 @@ const addCopyButton = () => {
     for (command of allTerminalCodesHTML) {
         command.addEventListener("click", (e) => {
             let textToCopy = clearUpTerminalTextHTML(e.target.innerHTML);
-            alert(textToCopy);
             navigator.clipboard.writeText(textToCopy);
-            let oldText = e.target.innerHTML;
-            if (!(oldText.includes("COPIED"))) {
-                e.target.innerHTML = oldText + "<div style=\"color=white; text-align: right; font-size: .5rem; margin-top: -.58rem\">COPIED</div></div>";
-            }
-            setTimeout(() => {e.target.innerHTML = e.target.innerHTML.replaceAll("<div style=\"color=white; text-align: right; font-size: .5rem; margin-top: -.58rem\">COPIED</div>", "")}, 700);
         })
     }
 }

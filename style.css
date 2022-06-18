@@ -7,7 +7,7 @@ body {
 }
 
 .terminalCode {
-    background-color: rgba(16, 17, 61, .8);
+    background-color: rgba(64, 65, 98, 1);
     padding: 20px;
     border-radius: 5px;
     color: rgba(220, 220, 220, 1);
@@ -43,6 +43,7 @@ h2 {
 h1 {
     color: rgb(27, 29, 105);
     font-size: 1.4rem;
+    margin-top: 50px;
 }
 
 i {

@@ -6,7 +6,7 @@ body {
     margin: 0;
 }
 
-.terminalCode {
+.terminalCode, .terminalCodeWithoutCopy, .terminalCodeJs {
     background-color: rgba(64, 65, 98, 1);
     padding: 20px;
     border-radius: 5px;
@@ -16,7 +16,11 @@ body {
     margin-bottom: -0.3rem;
 }
 
-.terminalCode > i {
+.terminalCodeWithoutCopy, .terminalCodeJs {
+    line-height: .8rem;
+}
+
+.terminalCode > i, terminalCodeWithoutCopy > i {
     color: rgba(150, 150, 150, 1);
     font-size: .5rem;
 }

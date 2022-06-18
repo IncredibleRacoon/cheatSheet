@@ -30,10 +30,36 @@
                 install webpack locally, and install the wepack-cli
                 (the tool used to run webpack on the command line):
             </p>
+            <h3>Create project</h3>
+            <p></p>
             <div class="terminalCode">$ mkdir <i>project_name</i></div>
             <div class="terminalCode">$ cd <i>project_name</i></div>
             <div class="terminalCode">$ npm init -y</div>
             <div class="terminalCode">$ npm install webpack webpack-cli --save-dev</div>
+            <p>
+                Now we'll create the following directory structure, files and their contents:
+            </p>
+            <h3>project</h3>
+            <p></p>
+            <div class="terminalCodeWithoutCopy">
+                webpack-demo<br>
+                |- package.json<br>
+                |- package-lock.json<br>
+                |- index.html<br>
+                |- /src<br>
+                &nbsp;&nbsp;|- index.js
+            </div>
+            <h3>src/index.js</h3>
+            <p></p>
+            <div class="terminalCodeJs">
+                function component() {<br>
+                &nbsp;&nbsp;const element = document.createElement("div");<br><br>
+                &nbsp;&nbsp;// Lodash, currently included via a script, is required for this line to work<br>
+                &nbsp;&nbsp;element.innerHTML = _.join(["Hello", "webpack"], " ");<br><br>
+                &nbsp;&nbsp;return element;<br>
+                }<br>
+                document.body.appendChild(component());
+            </div>
 
             <h2>Add modules</h2>
 

@@ -51,8 +51,25 @@ const addCopyButton = () => {
             setTimeout(() => {e.target.innerHTML = e.target.innerHTML.replaceAll("<div style=\"color=white; text-align: right; font-size: .5rem; margin-top: -.58rem\">COPIED</div>", "")}, 700);
         })
     }
+
+    const allTerminalCodesJS = document.getElementsByClassName("terminalCodeJs");
+    for (command of allTerminalCodesJS) {
+        command.addEventListener("click", (e) => {
+            let textToCopy = clearUpTerminalTextJs(e.target.innerHTML);
+            navigator.clipboard.writeText(textToCopy);
+            let oldText = e.target.innerHTML;
+            if (!(oldText.includes("COPIED"))) {
+                e.target.innerHTML = oldText + "<div style=\"color=white; text-align: right; font-size: .5rem; margin-top: -.58rem\">COPIED</div></div>";
+            }
+            setTimeout(() => {e.target.innerHTML = e.target.innerHTML.replaceAll("<div style=\"color=white; text-align: right; font-size: .5rem; margin-top: -.58rem\">COPIED</div>", "")}, 700);
+        })
+    }
 }
 
 const clearUpTerminalText = (terminalText) => {
     return(terminalText.slice(2).replaceAll("<i>", "").replaceAll("</i>", ""));
 }
+const clearUpTerminalTextJs = (terminalText) => {
+    return(terminalText.slice(2).replaceAll("<i>", "").replaceAll("</i>", "").replaceAll("&nbsp;&nbsp;", "  ").replaceAll("<br><br>", "\n").replaceAll("<br>", ""));
+}
+

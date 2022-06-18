@@ -64,6 +64,19 @@ const addCopyButton = () => {
             setTimeout(() => {e.target.innerHTML = e.target.innerHTML.replaceAll("<div style=\"color=white; text-align: right; font-size: .5rem; margin-top: -.58rem\">COPIED</div>", "")}, 700);
         })
     }
+
+    const allTerminalCodesHTML = document.getElementsByClassName("terminalCodeHTML");
+    for (command of allTerminalCodesHTML) {
+        command.addEventListener("click", (e) => {
+            let textToCopy = clearUpTerminalTextHTML(e.target.innerHTML);
+            navigator.clipboard.writeText(textToCopy);
+            let oldText = e.target.innerHTML;
+            if (!(oldText.includes("COPIED"))) {
+                e.target.innerHTML = oldText + "<div style=\"color=white; text-align: right; font-size: .5rem; margin-top: -.58rem\">COPIED</div></div>";
+            }
+            setTimeout(() => {e.target.innerHTML = e.target.innerHTML.replaceAll("<div style=\"color=white; text-align: right; font-size: .5rem; margin-top: -.58rem\">COPIED</div>", "")}, 700);
+        })
+    }
 }
 
 const clearUpTerminalText = (terminalText) => {
@@ -72,4 +85,22 @@ const clearUpTerminalText = (terminalText) => {
 const clearUpTerminalTextJs = (terminalText) => {
     return(terminalText.slice(2).replaceAll("<i>", "").replaceAll("</i>", "").replaceAll("&nbsp;&nbsp;", "  ").replaceAll("<br><br>", "\n").replaceAll("<br>", ""));
 }
+const clearUpTerminalTextHTML = (terminalText) => {
+    return(terminalText.slice(2).replaceAll("<i>", "").replaceAll("</i>", "").replaceAll("&nbsp;&nbsp;", "  ").replaceAll("<br><br>", "\n").replaceAll("<br>", ""));
+}
+
+const htmlCodeToHtmlContent = (string) => {
+    return(string.replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("  " ,"&nbsp;&nbsp;").replaceAll("\n", "<br>"));
+}
+alert(htmlCodeToHtmlContent(`<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Getting Started</title>
+    <script src="https://unpkg.com/lodash@4.17.20"></script>
+  </head>
+  <body>
+    <script src="./src/index.js"></script>
+  </body>
+</html>`))
 

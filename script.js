@@ -93,16 +93,19 @@ const clearUpTerminalTextHTML = (terminalText) => {
 const htmlCodeToHtmlContent = (string) => {
     return(string.replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("  " ,"&nbsp;&nbsp;").replaceAll("\n", "<br>"));
 }
-alert(htmlCodeToHtmlContent(`<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>Getting Started</title>
-    <script src="https://unpkg.com/lodash@4.17.20"></script>
-  </head>
-  <body>
-    <script src="./src/index.js"></script>
-  </body>
-</html>`))
 
-            
+const jsCodeToHtmlContent = (string) => {
+    return(string.replaceAll("  ", "&nbsp;&nbsp;").replaceAll("\n", "<br>"));
+}
+
+let textToTranslateFromHtml = ``;
+
+let textToTranslateFromJs = ``;
+
+
+if (textToTranslateFromHtml != ``) {
+    alert(htmlCodeToHtmlContent(textToTranslateFromHtml))
+} else if (textToTranslateFromJs != ``) {
+    alert(jsCodeToHtmlContent(textToTranslateFromJs))
+}
+

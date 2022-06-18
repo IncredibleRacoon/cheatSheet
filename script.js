@@ -12,6 +12,7 @@ function startFunction() {
 
     createChapterContent();
     addCopyButton();
+    createAnimation();
 
 }
 
@@ -44,6 +45,7 @@ const addCopyButton = () => {
         command.addEventListener("click", (e) => {
             let textToCopy = clearUpTerminalText(e.target.innerHTML);
             navigator.clipboard.writeText(textToCopy);
+            showCopyAnimation();
         })
     }
 
@@ -52,6 +54,7 @@ const addCopyButton = () => {
         command.addEventListener("click", (e) => {
             let textToCopy = clearUpTerminalTextJs(e.target.innerHTML);
             navigator.clipboard.writeText(textToCopy);
+            showCopyAnimation();
         })
     }
 
@@ -60,8 +63,27 @@ const addCopyButton = () => {
         command.addEventListener("click", (e) => {
             let textToCopy = clearUpTerminalTextHTML(e.target.innerHTML);
             navigator.clipboard.writeText(textToCopy);
+            showCopyAnimation();
         })
     }
+}
+
+const createAnimation = () => {
+    alertBox = document.createElement("div");
+    alertBox.innerHTML = "Kopiert";
+    alertBox.setAttribute("id", "copyMessage");
+    alertBox.style.opacity = "0";
+    document.body.appendChild(alertBox);
+}
+
+const showCopyAnimation = () => {
+    let alertBox = document.getElementById("copyMessage");
+    alertBox.style.transition = "opacity .0s";
+    alertBox.style.opacity = "1.0";
+    window.setTimeout(() => {
+        alertBox.style.transition = "opacity .5s";
+        alertBox.style.opacity = 0;
+    }, 300);
 }
 
 const clearUpTerminalText = (terminalText) => {

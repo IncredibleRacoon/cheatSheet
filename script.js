@@ -45,8 +45,10 @@ const addCopyButton = () => {
             let textToCopy = clearUpTerminalText(e.target.innerHTML);
             navigator.clipboard.writeText(textToCopy);
             let oldText = e.target.innerHTML;
-            e.target.innerHTML = e.target.innerHTML.slice(0, -4) + "<div style=\"color=white; text-align: right; font-size: .5rem; margin-top: -.58rem\">COPIED</div></div>";
-            setTimeout(() => {e.target.innerHTML = oldText}, 700);
+            if (!(e.target.innerHTML.includes("COPIED"))) {
+                e.target.innerHTML = e.target.innerHTML.slice(0, -4) + "<div style=\"color=white; text-align: right; font-size: .5rem; margin-top: -.58rem\">COPIED</div></div>";
+            }
+            setTimeout(() => {e.target.innerHTML = e.target.innerHTML.replaceAll("<div style=\"color=white; text-align: right; font-size: .5rem; margin-top: -.58rem\">COPIED</div>", "")}, 700);
         })
     }
 }

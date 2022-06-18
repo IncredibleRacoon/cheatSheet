@@ -6,7 +6,7 @@ body {
     margin: 0;
 }
 
-.terminalCode, .terminalCodeWithoutCopy, .terminalCodeJs {
+.terminalCode, .terminalCodeWithoutCopy, .terminalCodeJs, .terminalCodeHTML {
     background-color: rgba(64, 65, 98, 1);
     padding: 20px;
     border-radius: 5px;
@@ -14,14 +14,18 @@ body {
     font-size: .5rem;
     margin-top: -0.53em;
     margin-bottom: -0.3rem;
+    font-family: monospace;
+    overflow: scroll;
+    white-space: nowrap;
 }
 
-.terminalCodeWithoutCopy, .terminalCodeJs {
+.terminalCodeWithoutCopy, .terminalCodeJs, .terminalCodeHTML {
     line-height: .8rem;
 }
 
 .terminalCode > i, terminalCodeWithoutCopy > i {
     color: rgba(150, 150, 150, 1);
+    font-family: monospace;
     font-size: .5rem;
 }
 

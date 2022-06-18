@@ -52,14 +52,24 @@
             <h3>src/index.js</h3>
             <p></p>
             <div class="terminalCodeJs">
-                function component() {<br>
-                &nbsp;&nbsp;const element = document.createElement("div");<br><br>
-                &nbsp;&nbsp;// Lodash, currently included via a script, is required for this line to work<br>
-                &nbsp;&nbsp;element.innerHTML = _.join(["Hello", "webpack"], " ");<br><br>
-                &nbsp;&nbsp;return element;<br>
-                }<br>
-                document.body.appendChild(component());
+                function component() {<br>&nbsp;&nbsp;&nbsp;&nbsp;const element = document.createElement('div');<br><br>&nbsp;&nbsp;&nbsp;&nbsp;// Lodash, currently included via a script, is required for this line to work<br>&nbsp;&nbsp;&nbsp;&nbsp;element.innerHTML = _.join(['Hello', 'webpack'], ' ');<br><br>&nbsp;&nbsp;&nbsp;&nbsp;return element;<br>}<br>&nbsp;&nbsp;<br>document.body.appendChild(component());
             </div>
+            <h3>index.html</h3>
+            <p></p>
+            <div class="terminalCodeHTML">
+                &lt;!DOCTYPE html&gt;<br>&lt;html&gt;<br>&nbsp;&lt;head&gt;<br>&nbsp;&nbsp;&lt;meta charset="utf-8" /&gt;<br>&nbsp;&nbsp;&lt;title&gt;Getting Started&lt;/title&gt;<br>&nbsp;&nbsp;&lt;script src="https://unpkg.com/lodash@4.17.20"&gt;&lt;/script&gt;<br>&nbsp;&lt;/head&gt;<br>&nbsp;&lt;body&gt;<br>&nbsp;&nbsp;&lt;script src="./src/index.js"&gt;&lt;/script&gt;<br>&nbsp;&lt;/body&gt;<br>&lt;/html&gt;
+            </div>
+            <h3>package.json</h3>
+            <p></p>
+            <div class="terminalCodeJs">
+                {<br>&nbsp;&nbsp;&nbsp;&nbsp;"name": "webpack-demo",<br>&nbsp;&nbsp;&nbsp;&nbsp;"version": "1.0.0",<br>&nbsp;&nbsp;&nbsp;&nbsp;"description": "",<br>&nbsp;&nbsp;&nbsp;&nbsp;"main": "index.js",<br>&nbsp;&nbsp;&nbsp;&nbsp;"private": true,<br>&nbsp;&nbsp;&nbsp;&nbsp;"scripts": {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"test": "echo "Error: no test specified" && exit 1"<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;"keywords": [],<br>&nbsp;&nbsp;&nbsp;&nbsp;"author": "",<br>&nbsp;&nbsp;&nbsp;&nbsp;"license": "MIT",<br>&nbsp;&nbsp;&nbsp;&nbsp;"devDependencies": {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"webpack": "^5.38.1",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"webpack-cli": "^4.7.2",<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;}
+            </div>
+            <p>
+                In this example, there are implicit dependencies between the script-tags.
+                Our index.js file depends on lodash being inclueded in the page before it runs.
+                This is because index.js never explicity declared the use of lodash, it just assumes
+                that _ is declared.
+            </p>
 
             <h2>Add modules</h2>
 
@@ -73,4 +83,5 @@
     </div>
 
 </body>
-</html>
+</html>     
+            

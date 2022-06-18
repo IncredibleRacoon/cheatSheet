@@ -84,7 +84,7 @@ const clearUpTerminalText = (terminalText) => {
     return(terminalText.slice(2).replaceAll("<i>", "").replaceAll("</i>", ""));
 }
 const clearUpTerminalTextJs = (terminalText) => {
-    return(terminalText.slice(2).replaceAll("<i>", "").replaceAll("</i>", "").replaceAll("&nbsp;&nbsp;", "  ").replaceAll("<br><br>", "\n").replaceAll("<br>", ""));
+    return(terminalText.slice(2).replaceAll("<i>", "").replaceAll("</i>", "").replaceAll("&nbsp;&nbsp;", "  ").replaceAll("<br><br>", "\n\n").replaceAll("<br>", "\n"));
 }
 const clearUpTerminalTextHTML = (terminalText) => {
     return(terminalText.replaceAll("&lt;", "<").replaceAll("&gt;", ">").replaceAll("&nbsp;&nbsp;", "    ").replaceAll("<br>", "\n").replaceAll("&nbsp;", "  "));
@@ -108,4 +108,3 @@ if (textToTranslateFromHtml != ``) {
 } else if (textToTranslateFromJs != ``) {
     alert(jsCodeToHtmlContent(textToTranslateFromJs))
 }
-

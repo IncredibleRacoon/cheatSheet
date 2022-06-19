@@ -109,6 +109,8 @@ i {
     margin-left: 20px;
     padding-right: 20px;
     width: max-content;
+    height: 100%;
+    overflow: scroll;
 }
 
 #menuContentContainer {
@@ -141,11 +143,8 @@ a {
 
 }
 
-.codeSnippet {
+code {
     font-size: .6rem;
     display: inline-block;
-    background-color: rgba(27, 29, 105, 0.3);
-    padding-left: .3rem;
-    padding-right: .3rem;
-    border-radius: .2rem;
+    color: rgba(27, 29, 105, 1);
 }

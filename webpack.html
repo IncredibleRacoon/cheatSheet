@@ -72,8 +72,69 @@
             </p>
 
             <h2>Creating a bundle</h2>
+            <p>
+                Now we'll add a new directory named <code class="codeSnippet">./dist</code>
+                which is short for distribution and is the place we want the output to be
+                written in. Here the optimized and minimized ouput is stored.
+                Now we have a structure like this:
+            </p>
+            <h3>project</h3>
+            <p></p>
+            <div class="terminalCodeWithoutCopy">
+                webpack-demo<br>
+                |- package.json<br>
+                |- package-lock.json<br>
+                |- /dist<br>
+                &nbsp;&nbsp;|- index.html<br>
+                |- /src<br>
+                &nbsp;&nbsp;|- index.js
+            </div>
+            <p>
+                To bundle the <code>lodash</code> dependency with 
+                <code>index.js</code>, we'll need to install the
+                library locally:
+            </p>
+            <div class="terminalCode">$ npm install --save lodash</div>
+            <p>
+                Now, let's import <code>lodash</code> in our script:
+            </p>
+            <h3>src/index.js</h3>
+            <p></p>
+            <div class="terminalCodeJs">
+                function component() {<br>&nbsp;&nbsp;&nbsp;&nbsp;const element = document.createElement('div');<br><br>&nbsp;&nbsp;&nbsp;&nbsp;// Lodash, now imported by this script<br>&nbsp;&nbsp;&nbsp;&nbsp;element.innerHTML = _.join(['Hello', 'webpack'], ' ');<br><br>&nbsp;&nbsp;&nbsp;&nbsp;return element;<br>}<br><br>document.body.appendChild(component());
+            </div>
+            <p>
+                Now, since we'll bundling our scripts, we have to update our
+                <code>index.html</code> file. Let's remove the lodash <code>&lt;script&gt;</code>,
+                as we now <code>import</code> it, and modify the other <code>&lt;script&gt;</code>
+                tag to load the bundle, instead the of the raw <code>./src</code> file:
+            </p>
+            <h3>dist/index.html</h3>
+            <p></p>
+            <div class="terminalCodeHTML">
+                &lt;!DOCTYPE html&gt;<br>&lt;html&gt;<br>&nbsp;&nbsp;&lt;head&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta charset="utf-8" /&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;Getting Started&lt;/title&gt;<br>&nbsp;&nbsp;&lt;/head&gt;<br>&nbsp;&nbsp;&lt;body&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;script src="./src/index.js"&gt;&lt;/script&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;script src="main.js"&gt;&lt;/script&gt;<br>&nbsp;&nbsp;&lt;/body&gt;<br>&lt;/html&gt;
+            </div>
+            <p>
+                In this setup, <code>index.js</code> explicitly requires <code>lodash</code>
+                to be present, and binds it as <code>_</code> (no global scope pollution). By stating
+                what dependencies a module need, wepack can build a dependency graph. It then uses the
+                graph to generate an optimized bundle where scripts will be executed in the correct
+                order.
+            </p>
+            <p>
+                With the said, let's run the following command, which will take our scripts at <code>
+                    src/index.js
+                </code>
+                as the entry point, and will generate <code>dist/main.js</code> as the output.
+            </p>
+            <div class="terminalCode">$ npx webpack</div>
+            <p>
+                Now open <code>index.html</code> from the <code>dist</code> directory in your browser
+                and, if everything went right, you should see the following text: <code>"Hello webpack"</code>.
+            </p>
+            <h2>Import and Export</h2>
 
-            <h2>Add assets</h2>
+
             
         </div>
         <div id="chapterContainer">

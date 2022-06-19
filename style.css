@@ -67,6 +67,7 @@ i {
     grid-area: content;
     height: 100%;
     overflow: scroll;
+    margin: auto;
 }
 
 #gridContainer {
@@ -147,4 +148,13 @@ code {
     font-size: .6rem;
     display: inline-block;
     color: rgba(27, 29, 105, 1);
+}
+
+*::-webkit-scrollbar {
+    display: none;
+}
+  
+* {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }

@@ -132,10 +132,102 @@
                 Now open <code>index.html</code> from the <code>dist</code> directory in your browser
                 and, if everything went right, you should see the following text: <code>"Hello webpack"</code>.
             </p>
-            <h2>Import and Export</h2>
+            <h2>Import and Export syntax</h2>
+            <h3>Import</h3>
+            <p></p>
+            <div class="terminalCodeWithoutCopy">
+                import defaultExport from "module-name";<br>
+                import * as name from "module-name";<br>
+                import { export1 } from "module-name";<br>
+                import { export1 as alias1 } from "module-name";<br>
+                import { export1 , export2 } from "module-name";<br>
+                import { export1 , export2 as alias2 , [...] } from "module-name";<br>
+                import defaultExport, { export1 [ , [...] ] } from "module-name";<br>
+                import defaultExport, * as name from "module-name";<br>
+                import "module-name";<br>
+                var promise = import("module-name");
+            </div>
+            <h3>Export</h3>
+            <p></p>
+            <div class="terminalCodeWithoutCopy">
+                export let name1, name2, …, nameN; // also var, const <br>
+                export let name1 = …, name2 = …, …, nameN; // also var, const<br>
+                export function functionName(){...}<br>
+                export class ClassName {...}<br>
+                <br>
+                // Export list<br>
+                export { name1, name2, …, nameN };<br>
+                <br>
+                // Renaming exports<br>
+                export { variable1 as name1, variable2 as name2, …, nameN };<br>
+                <br>
+                // Exporting destructured assignments with renaming<br>
+                export const { name1, name2: bar } = o;<br>
+                export const [ name1, name2 ] = array;<br>
+                <br>
+                // Default exports<br>
+                export default expression;<br>
+                export default function (…) { … } // also class, function*<br>
+                export default function name1(…) { … } // also class, function*<br>
+                export { name1 as default, … };<br>
+                <br>
+                // Aggregating modules<br>
+                export * from …; // does not set the default export<br>
+                export * as name1 from …; // ECMAScript® 2020<br>
+                export { name1, name2, …, nameN } from …;<br>
+                export { import1 as name1, import2 as name2, …, nameN } from …;<br>
+                export { default, … } from …;
+            </div>
+            <h2>Using a configuration</h2>
+            <p>
+                As of version 4 webpack doesn't require configuration, but most projects
+                will need a more complex setup, which is why webpack supports a
+                configuration file.
+            </p>
+            <h3>project</h3>
+            <p></p>
+            <div class="terminalCodeWithoutCopy">
+                webpack-demo<br>
+                |- package.json<br>
+                |- package-lock.json<br>
+                |- webpack.config.js<br>
+                |- /dist<br>
+                &nbsp;&nbsp;|- index.html<br>
+                |- /src<br>
+                &nbsp;&nbsp;|- index.js
+            </div>
+            <h3>webpack.config.js</h3>
+            <p></p>
+            <div class="terminalCodeJs">
+                const path = require('path');<br><br>module.exports = {<br>&nbsp;&nbsp;entry: './src/index.js',<br>&nbsp;&nbsp;output: {<br>&nbsp;&nbsp;&nbsp;&nbsp;filename: 'main.js',<br>&nbsp;&nbsp;&nbsp;&nbsp;path: path.resolve(__dirname, 'dist'),<br>&nbsp;&nbsp;},<br>};
+            </div>
+            <p>
+                Now, let's run the build again but instead using our new configuration file:
+            </p>
+            <div class="terminalCode">$ npx webpack --config webpack.config.js</div>
+            <h2>NPM Scripts</h2>
+            <p>
+                Given it's not particulary fun to run a local copy of webpack from the
+                CLI, we can set up a little shortcut. Let's adjust our <code>package.json</code>
+                by adding an npm script:
+            </p>
+            <h3>package.json</h3>
+            <p></p>
+            <div class="terminalCodeJs">
+                {<br>&nbsp;&nbsp;&nbsp;&nbsp;"name": "webpack-demo",<br>&nbsp;&nbsp;&nbsp;&nbsp;"version": "1.0.0",<br>&nbsp;&nbsp;&nbsp;&nbsp;"description": "",<br>&nbsp;&nbsp;&nbsp;&nbsp;"private": true,<br>&nbsp;&nbsp;&nbsp;&nbsp;"scripts": {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"test": "echo "Error: no test specified" && exit 1",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"build": "webpack"<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;"keywords": [],<br>&nbsp;&nbsp;&nbsp;&nbsp;"author": "",<br>&nbsp;&nbsp;&nbsp;&nbsp;"license": "ISC",<br>&nbsp;&nbsp;&nbsp;&nbsp;"devDependencies": {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"webpack": "^5.4.0",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"webpack-cli": "^4.2.0"<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;"dependencies": {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"lodash": "^4.17.20"<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>}
+            </div>
+            <p>
+                Now the <code>npm run build</code> command can be used in placed of the
+                npx command we used earlier. Note that within <code>scripts</code> we can
+                reference locally installed npm packages by name the same way we did with
+                npx. This convention is the standard in most npm-based projects because it allows
+                all contributors to use the same set of common scripts.
+                No run the following command and see if your script alias works:
+            </p>
+            <div class="terminalCode">$ npm run build</div>
 
 
-            
+
         </div>
         <div id="chapterContainer">
             <div id="chapterContent">

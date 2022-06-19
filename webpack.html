@@ -24,18 +24,15 @@
         <div id="contentContainer">
             <h1>Webpack</h1>
 
-            <h2>Basic Setup</h2>
-            <p>
-                First let's create a directory, initialize npm, 
-                install webpack locally, and install the wepack-cli
-                (the tool used to run webpack on the command line):
-            </p>
+            <h2>Setup</h2>
             <h3>Create project</h3>
             <p></p>
             <div class="terminalCode">$ mkdir <i>project_name</i></div>
             <div class="terminalCode">$ cd <i>project_name</i></div>
             <div class="terminalCode">$ npm init -y</div>
             <div class="terminalCode">$ npm install webpack webpack-cli --save-dev</div>
+            <div class="terminalCode">$ npm install --save-dev html-webpack-plugin</div>
+            <div class="terminalCode">$ npm install --save-dev webpack-dev-server</div>
             <p>
                 Now we'll create the following directory structure, files and their contents:
             </p>
@@ -45,179 +42,60 @@
                 webpack-demo<br>
                 |- package.json<br>
                 |- package-lock.json<br>
-                |- index.html<br>
+                |- server.js<br>
+                |- webpack.config.js<br>
+                |- /dist<br>
                 |- /src<br>
-                &nbsp;&nbsp;|- index.js
+                &nbsp;&nbsp;|- index.js<br>
+                &nbsp;&nbsp;|- print.js
             </div>
             <h3>src/index.js</h3>
             <p></p>
             <div class="terminalCodeJs">
-                function component() {<br>&nbsp;&nbsp;&nbsp;&nbsp;const element = document.createElement('div');<br><br>&nbsp;&nbsp;&nbsp;&nbsp;// Lodash, currently included via a script, is required for this line to work<br>&nbsp;&nbsp;&nbsp;&nbsp;element.innerHTML = _.join(['Hello', 'webpack'], ' ');<br><br>&nbsp;&nbsp;&nbsp;&nbsp;return element;<br>}<br>&nbsp;&nbsp;<br>document.body.appendChild(component());
+                import _ from 'lodash';<br>import printMe from './print.js';<br><br>function component() {<br>&nbsp;&nbsp;&nbsp;&nbsp;const element = document.createElement('div');<br>&nbsp;&nbsp;&nbsp;&nbsp;const btn = document.createElement('button');<br><br>&nbsp;&nbsp;&nbsp;&nbsp;element.innerHTML = _.join(['Hello', 'webpack'], ' ');<br><br>&nbsp;&nbsp;&nbsp;&nbsp;btn.innerHTML = 'Click me and check the console!';<br>&nbsp;&nbsp;&nbsp;&nbsp;btn.onclick = printMe;<br><br>&nbsp;&nbsp;&nbsp;&nbsp;element.appendChild(btn);<br><br>&nbsp;&nbsp; return element;<br>}<br><br>document.body.appendChild(component());
             </div>
-            <h3>index.html</h3>
+            <h3>src/print.js</h3>
             <p></p>
-            <div class="terminalCodeHTML">
-                &lt;!DOCTYPE html&gt;<br>&lt;html&gt;<br>&nbsp;&lt;head&gt;<br>&nbsp;&nbsp;&lt;meta charset="utf-8" /&gt;<br>&nbsp;&nbsp;&lt;title&gt;Getting Started&lt;/title&gt;<br>&nbsp;&nbsp;&lt;script src="https://unpkg.com/lodash@4.17.20"&gt;&lt;/script&gt;<br>&nbsp;&lt;/head&gt;<br>&nbsp;&lt;body&gt;<br>&nbsp;&nbsp;&lt;script src="./src/index.js"&gt;&lt;/script&gt;<br>&nbsp;&lt;/body&gt;<br>&lt;/html&gt;
-            </div>
+            <div class="terminalCodeJs">
+                export default function printMe() {<br>&nbsp;&nbsp;&nbsp;&nbsp;console.log('I get called from print.js!');<br>}</div>
             <h3>package.json</h3>
             <p></p>
             <div class="terminalCodeJs">
-                {<br>&nbsp;&nbsp;&nbsp;&nbsp;"name": "webpack-demo",<br>&nbsp;&nbsp;&nbsp;&nbsp;"version": "1.0.0",<br>&nbsp;&nbsp;&nbsp;&nbsp;"description": "",<br>&nbsp;&nbsp;&nbsp;&nbsp;"main": "index.js",<br>&nbsp;&nbsp;&nbsp;&nbsp;"private": true,<br>&nbsp;&nbsp;&nbsp;&nbsp;"scripts": {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"test": "echo "Error: no test specified" && exit 1"<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;"keywords": [],<br>&nbsp;&nbsp;&nbsp;&nbsp;"author": "",<br>&nbsp;&nbsp;&nbsp;&nbsp;"license": "MIT",<br>&nbsp;&nbsp;&nbsp;&nbsp;"devDependencies": {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"webpack": "^5.38.1",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"webpack-cli": "^4.7.2",<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>}
-            </div>
-            <p>
-                In this example, there are implicit dependencies between the script-tags.
-                Our index.js file depends on lodash being inclueded in the page before it runs.
-                This is because index.js never explicity declared the use of lodash, it just assumes
-                that _ is declared.
-            </p>
-
-            <h2>Creating a bundle</h2>
-            <p>
-                Now we'll add a new directory named <code class="codeSnippet">./dist</code>
-                which is short for distribution and is the place we want the output to be
-                written in. Here the optimized and minimized ouput is stored.
-                Now we have a structure like this:
-            </p>
-            <h3>project</h3>
-            <p></p>
-            <div class="terminalCodeWithoutCopy">
-                webpack-demo<br>
-                |- package.json<br>
-                |- package-lock.json<br>
-                |- /dist<br>
-                &nbsp;&nbsp;|- index.html<br>
-                |- /src<br>
-                &nbsp;&nbsp;|- index.js
-            </div>
-            <p>
-                To bundle the <code>lodash</code> dependency with 
-                <code>index.js</code>, we'll need to install the
-                library locally:
-            </p>
-            <div class="terminalCode">$ npm install --save lodash</div>
-            <p>
-                Now, let's import <code>lodash</code> in our script:
-            </p>
-            <h3>src/index.js</h3>
-            <p></p>
-            <div class="terminalCodeJs">
-                function component() {<br>&nbsp;&nbsp;&nbsp;&nbsp;const element = document.createElement('div');<br><br>&nbsp;&nbsp;&nbsp;&nbsp;// Lodash, now imported by this script<br>&nbsp;&nbsp;&nbsp;&nbsp;element.innerHTML = _.join(['Hello', 'webpack'], ' ');<br><br>&nbsp;&nbsp;&nbsp;&nbsp;return element;<br>}<br><br>document.body.appendChild(component());
-            </div>
-            <p>
-                Now, since we'll bundling our scripts, we have to update our
-                <code>index.html</code> file. Let's remove the lodash <code>&lt;script&gt;</code>,
-                as we now <code>import</code> it, and modify the other <code>&lt;script&gt;</code>
-                tag to load the bundle, instead the of the raw <code>./src</code> file:
-            </p>
-            <h3>dist/index.html</h3>
-            <p></p>
-            <div class="terminalCodeHTML">
-                &lt;!DOCTYPE html&gt;<br>&lt;html&gt;<br>&nbsp;&nbsp;&lt;head&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta charset="utf-8" /&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;Getting Started&lt;/title&gt;<br>&nbsp;&nbsp;&lt;/head&gt;<br>&nbsp;&nbsp;&lt;body&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;script src="./src/index.js"&gt;&lt;/script&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;script src="main.js"&gt;&lt;/script&gt;<br>&nbsp;&nbsp;&lt;/body&gt;<br>&lt;/html&gt;
-            </div>
-            <p>
-                In this setup, <code>index.js</code> explicitly requires <code>lodash</code>
-                to be present, and binds it as <code>_</code> (no global scope pollution). By stating
-                what dependencies a module need, wepack can build a dependency graph. It then uses the
-                graph to generate an optimized bundle where scripts will be executed in the correct
-                order.
-            </p>
-            <p>
-                With the said, let's run the following command, which will take our scripts at <code>
-                    src/index.js
-                </code>
-                as the entry point, and will generate <code>dist/main.js</code> as the output.
-            </p>
-            <div class="terminalCode">$ npx webpack</div>
-            <p>
-                Now open <code>index.html</code> from the <code>dist</code> directory in your browser
-                and, if everything went right, you should see the following text: <code>"Hello webpack"</code>.
-            </p>
-            <h2>Import and Export syntax</h2>
-            <h3>Import</h3>
-            <p></p>
-            <div class="terminalCodeWithoutCopy">
-                import defaultExport from "module-name";<br>
-                import * as name from "module-name";<br>
-                import { export1 } from "module-name";<br>
-                import { export1 as alias1 } from "module-name";<br>
-                import { export1 , export2 } from "module-name";<br>
-                import { export1 , export2 as alias2 , [...] } from "module-name";<br>
-                import defaultExport, { export1 [ , [...] ] } from "module-name";<br>
-                import defaultExport, * as name from "module-name";<br>
-                import "module-name";<br>
-                var promise = import("module-name");
-            </div>
-            <h3>Export</h3>
-            <p></p>
-            <div class="terminalCodeWithoutCopy">
-                export let name1, name2, …, nameN; // also var, const <br>
-                export let name1 = …, name2 = …, …, nameN; // also var, const<br>
-                export function functionName(){...}<br>
-                export class ClassName {...}<br>
-                <br>
-                // Export list<br>
-                export { name1, name2, …, nameN };<br>
-                <br>
-                // Renaming exports<br>
-                export { variable1 as name1, variable2 as name2, …, nameN };<br>
-                <br>
-                // Exporting destructured assignments with renaming<br>
-                export const { name1, name2: bar } = o;<br>
-                export const [ name1, name2 ] = array;<br>
-                <br>
-                // Default exports<br>
-                export default expression;<br>
-                export default function (…) { … } // also class, function*<br>
-                export default function name1(…) { … } // also class, function*<br>
-                export { name1 as default, … };<br>
-                <br>
-                // Aggregating modules<br>
-                export * from …; // does not set the default export<br>
-                export * as name1 from …; // ECMAScript® 2020<br>
-                export { name1, name2, …, nameN } from …;<br>
-                export { import1 as name1, import2 as name2, …, nameN } from …;<br>
-                export { default, … } from …;
-            </div>
-            <h2>Using a configuration</h2>
-            <p>
-                As of version 4 webpack doesn't require configuration, but most projects
-                will need a more complex setup, which is why webpack supports a
-                configuration file.
-            </p>
-            <h3>project</h3>
-            <p></p>
-            <div class="terminalCodeWithoutCopy">
-                webpack-demo<br>
-                |- package.json<br>
-                |- package-lock.json<br>
-                |- webpack.config.js<br>
-                |- /dist<br>
-                &nbsp;&nbsp;|- index.html<br>
-                |- /src<br>
-                &nbsp;&nbsp;|- index.js
-            </div>
+                {<br>&nbsp;&nbsp;&nbsp;&nbsp;"name": "webpack-demo",<br>&nbsp;&nbsp;&nbsp;&nbsp;"version": "1.0.0",<br>&nbsp;&nbsp;&nbsp;&nbsp;"description": "",<br>&nbsp;&nbsp;&nbsp;&nbsp;"private": true,<br>&nbsp;&nbsp;&nbsp;&nbsp;"scripts": {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"test": "echo "Error: no test specified" && exit 1",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"watch": "webpack --watch",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"start": "webpack serve --open",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"server": "node server.js",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"build": "webpack"<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;"keywords": [],<br>&nbsp;&nbsp;&nbsp;&nbsp;"author": "",<br>&nbsp;&nbsp;&nbsp;&nbsp;"license": "ISC",<br>&nbsp;&nbsp;&nbsp;&nbsp;"devDependencies": {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"express": "^4.17.1",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"html-webpack-plugin": "^4.5.0",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"webpack": "^5.4.0",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"webpack-cli": "^4.2.0",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"webpack-dev-middleware": "^4.0.2",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"webpack-dev-server": "^3.11.0"<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;"dependencies": {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"lodash": "^4.17.20"<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>}            </div>
             <h3>webpack.config.js</h3>
             <p></p>
             <div class="terminalCodeJs">
-                const path = require('path');<br><br>module.exports = {<br>&nbsp;&nbsp;entry: './src/index.js',<br>&nbsp;&nbsp;output: {<br>&nbsp;&nbsp;&nbsp;&nbsp;filename: 'main.js',<br>&nbsp;&nbsp;&nbsp;&nbsp;path: path.resolve(__dirname, 'dist'),<br>&nbsp;&nbsp;},<br>};
+                const path = require('path');<br>const HtmlWebpackPlugin = require('html-webpack-plugin');<br><br>module.exports = {<br>&nbsp;&nbsp;&nbsp;&nbsp;mode: 'development',<br>&nbsp;&nbsp;&nbsp;&nbsp;entry: {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index: './src/index.js',<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print: './src/print.js',<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;devtool: 'inline-source-map',<br>&nbsp;&nbsp;&nbsp;&nbsp;devServer: {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;static: './dist',<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;plugins: [<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new HtmlWebpackPlugin({<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title: 'Development',<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}),<br>&nbsp;&nbsp;&nbsp;&nbsp;],<br>&nbsp;&nbsp;&nbsp;&nbsp;output: {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;filename: '[name].bundle.js',<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path: path.resolve(__dirname, 'dist'),<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clean: true,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;publicPath: '/',<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>};
             </div>
-            <p>
-                Now, let's run the build again but instead using our new configuration file:
-            </p>
-            <div class="terminalCode">$ npx webpack --config webpack.config.js</div>
-            <h2>NPM Scripts</h2>
-            <p>
-                Given it's not particulary fun to run a local copy of webpack from the
-                CLI, we can set up a little shortcut. Let's adjust our <code>package.json</code>
-                by adding an npm script:
-            </p>
-            <h3>package.json</h3>
+            <h3>server.js</h3>
             <p></p>
             <div class="terminalCodeJs">
-                {<br>&nbsp;&nbsp;&nbsp;&nbsp;"name": "webpack-demo",<br>&nbsp;&nbsp;&nbsp;&nbsp;"version": "1.0.0",<br>&nbsp;&nbsp;&nbsp;&nbsp;"description": "",<br>&nbsp;&nbsp;&nbsp;&nbsp;"private": true,<br>&nbsp;&nbsp;&nbsp;&nbsp;"scripts": {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"test": "echo "Error: no test specified" && exit 1",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"build": "webpack"<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;"keywords": [],<br>&nbsp;&nbsp;&nbsp;&nbsp;"author": "",<br>&nbsp;&nbsp;&nbsp;&nbsp;"license": "ISC",<br>&nbsp;&nbsp;&nbsp;&nbsp;"devDependencies": {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"webpack": "^5.4.0",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"webpack-cli": "^4.2.0"<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;"dependencies": {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"lodash": "^4.17.20"<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>}
+                const express = require('express');<br>const webpack = require('webpack');<br>const webpackDevMiddleware = require('webpack-dev-middleware');<br><br>const app = express();<br>const config = require('./webpack.config.js');<br>const compiler = webpack(config);<br><br>// Tell express to use the webpack-dev-middleware and use the webpack.config.js<br>// configuration file as a base.<br>app.use(<br>&nbsp;&nbsp;&nbsp;&nbsp;webpackDevMiddleware(compiler, {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;publicPath: config.output.publicPath,<br>&nbsp;&nbsp;&nbsp;&nbsp;})<br>);<br><br>// Serve the files on port 3000.<br>app.listen(3000, function () {<br>&nbsp;&nbsp;&nbsp;&nbsp;console.log('Example app listening on port 3000!');<br>});
+            </div>
+            <h2>Loading Assets example CSS</h2>
+            <p>
+                In order to import a CSS file from within a JavaScript module, you need to
+                install and add the style-loader and css-loader to your module configuration:
+            </p>
+            <div class="terminalCode">$ npm install --save-dev style-loader css-loader</div>
+            <h3>webpack.config.js with modules</h3>
+            <p></p>
+            <div class="terminalCodeJs">
+                const path = require('path');<br><br>module.exports = {<br>&nbsp;&nbsp;entry: './src/index.js',<br>&nbsp;&nbsp;output: {<br>&nbsp;&nbsp;&nbsp;&nbsp;filename: 'bundle.js',<br>&nbsp;&nbsp;&nbsp;&nbsp;path: path.resolve(__dirname, 'dist'),<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;// Here you add the assets<br>&nbsp;&nbsp;module: {<br>&nbsp;&nbsp;&nbsp;&nbsp;rules: [<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;test: /.css$/i,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;use: ['style-loader', 'css-loader'],<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;],<br>&nbsp;&nbsp;},<br>};
             </div>
             <p>
-                Now the <code>npm run build</code> command can be used in placed of the
+                Now you can add css files into the dist folder and refer to them with an import.
+            </p>
+
+            <h2>NPM Scripts</h2>
+            <h3>Example webpack</h3>
+            <p>
+                Given it's not particulary fun to run a local copy of webpack from the
+                CLI, we can set up a little shortcut. Therefor we need to edit the scripts section 
+                in the package.json file like you can see above with the <code>build</code> script.
+            </p>
+            <p>
+                Now the <code>npm run build</code> command can be used in place of the
                 npx command we used earlier. Note that within <code>scripts</code> we can
                 reference locally installed npm packages by name the same way we did with
                 npx. This convention is the standard in most npm-based projects because it allows
@@ -225,8 +103,12 @@
                 No run the following command and see if your script alias works:
             </p>
             <div class="terminalCode">$ npm run build</div>
+            <p>
+                This command equals the following command:
+            </p>
+            <div class="terminalCode">$ npx wepack</div>
 
-
+                
 
         </div>
         <div id="chapterContainer">

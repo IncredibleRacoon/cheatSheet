@@ -86,16 +86,23 @@ const createAnimation = () => {
     alertBox.setAttribute("id", "copyMessage");
     alertBox.style.opacity = "0";
     document.body.appendChild(alertBox);
+    alertBox.style.display = "none";
 }
 
 const showCopyAnimation = () => {
     let alertBox = document.getElementById("copyMessage");
     alertBox.style.transition = "opacity .0s";
+    alertBox.style.display = "block";
     alertBox.style.opacity = "1.0";
     window.setTimeout(() => {
         alertBox.style.transition = "opacity .5s";
         alertBox.style.opacity = 0;
+        window.setTimeout(() => {
+            alertBox.style.display = "none";
+        }, 500);
     }, 300);
+    
+
 }
 
 const clearUpTerminalText = (terminalText) => {

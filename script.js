@@ -43,8 +43,12 @@ const addCopyButton = () => {
     const allTerminalCodes = document.getElementsByClassName("terminalCode");
     for (command of allTerminalCodes) {
         command.addEventListener("click", (e) => {
-            let textToCopy = clearUpTerminalText(e.target.innerHTML);
-            navigator.clipboard.writeText(textToCopy);
+            if (window.getSelection().toString()) {
+                navigator.clipboard.writeText(window.getSelection().toString());
+            } else {
+                let textToCopy = clearUpTerminalText(e.target.innerHTML);
+                navigator.clipboard.writeText(textToCopy);    
+            }
             showCopyAnimation();
         })
     }
@@ -52,8 +56,12 @@ const addCopyButton = () => {
     const allTerminalCodesJS = document.getElementsByClassName("terminalCodeJs");
     for (command of allTerminalCodesJS) {
         command.addEventListener("click", (e) => {
-            let textToCopy = clearUpTerminalTextJs(e.target.innerHTML);
-            navigator.clipboard.writeText(textToCopy);
+            if (window.getSelection().toString()) {
+                navigator.clipboard.writeText(window.getSelection().toString());
+            } else {
+                let textToCopy = clearUpTerminalTextJs(e.target.innerHTML);
+                navigator.clipboard.writeText(textToCopy);    
+            }
             showCopyAnimation();
         })
     }
@@ -61,8 +69,12 @@ const addCopyButton = () => {
     const allTerminalCodesHTML = document.getElementsByClassName("terminalCodeHTML");
     for (command of allTerminalCodesHTML) {
         command.addEventListener("click", (e) => {
-            let textToCopy = clearUpTerminalTextHTML(e.target.innerHTML);
-            navigator.clipboard.writeText(textToCopy);
+            if (window.getSelection().toString()) {
+                navigator.clipboard.writeText(window.getSelection().toString());
+            } else {
+                let textToCopy = clearUpTerminalTextHTML(e.target.innerHTML);
+                navigator.clipboard.writeText(textToCopy);    
+            }
             showCopyAnimation();
         })
     }
@@ -110,7 +122,7 @@ let textToTranslateFromJs = ``;
 
 
 if (textToTranslateFromHtml != ``) {
-    alert(htmlCodeToHtmlContent(textToTranslateFromHtml))
+    alert(htmlCodeToHtmlContent(textToTranslateFromHtml));
 } else if (textToTranslateFromJs != ``) {
-    alert(jsCodeToHtmlContent(textToTranslateFromJs))
+    alert(jsCodeToHtmlContent(textToTranslateFromJs));
 }

@@ -14,6 +14,10 @@ function startFunction() {
     addCopyButton();
     createAnimation();
 
+    let placeMaker = document.createElement("div");
+    placeMaker.style.height = "100px";
+    document.getElementById("contentContainer").appendChild(placeMaker);
+
 }
 
 const createChapterContent = () => {
